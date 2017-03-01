@@ -15,5 +15,11 @@ public class Chess {
         System.out.println("wp wp wp wp wp wp wp wp 2"); // 7
         System.out.println("wR wN wB wQ wK wB wN wR 1"); // 8
         System.out.println(" a  b  c  d  e  f  g  h  "); // 9
+
+        hiFarah();
+    }
+
+    public static void hiFarah() {
+        System.out.println("Hi Farah!");
     }
 }
