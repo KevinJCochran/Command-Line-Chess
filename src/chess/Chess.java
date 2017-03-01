@@ -17,9 +17,14 @@ public class Chess {
         System.out.println(" a  b  c  d  e  f  g  h  "); // 9
 
         hiFarah();
+        hiKevin();
     }
 
     public static void hiFarah() {
         System.out.println("Hi Farah!");
+        
+    }
+    public static void hiKevin() {
+        System.out.println("Hi Kevin!");
     }
 }
