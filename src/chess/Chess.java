@@ -3,6 +3,7 @@ package chess;
 
 public class Chess {
     public static void main(String[] argv) {
+        Board board = new Board();
         drawBoardStart();
     }
     public static void drawBoardStart() {
@@ -15,16 +16,5 @@ public class Chess {
         System.out.println("wp wp wp wp wp wp wp wp 2"); // 7
         System.out.println("wR wN wB wQ wK wB wN wR 1"); // 8
         System.out.println(" a  b  c  d  e  f  g  h  "); // 9
-
-        hiFarah();
-        hiKevin();
-    }
-
-    public static void hiFarah() {
-        System.out.println("Hi Farah!");
-        
-    }
-    public static void hiKevin() {
-        System.out.println("Hi Kevin!!!!!");
     }
 }
