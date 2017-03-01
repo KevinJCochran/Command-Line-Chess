@@ -25,6 +25,6 @@ public class Chess {
         
     }
     public static void hiKevin() {
-        System.out.println("Hi Kevin!");
+        System.out.println("Hi Kevin!!!!!");
     }
 }
