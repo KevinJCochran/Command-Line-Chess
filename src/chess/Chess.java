@@ -5,6 +5,7 @@ public class Chess {
     public static void main(String[] argv) {
         Board board = new Board();
         System.out.println(board);
+        branchTest();
     }
     public static void drawBoardStart() {
         System.out.println("bR bN bB bQ bK bB bN bR 8"); // 1
@@ -16,5 +17,9 @@ public class Chess {
         System.out.println("wp wp wp wp wp wp wp wp 2"); // 7
         System.out.println("wR wN wB wQ wK wB wN wR 1"); // 8
         System.out.println(" a  b  c  d  e  f  g  h  "); // 9
+    }
+
+    public static void branchTest() {
+        System.out.println("Hello!");
     }
 }
