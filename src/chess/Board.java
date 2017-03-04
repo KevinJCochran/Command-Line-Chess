@@ -2,137 +2,133 @@ package chess;
 
 import Pieces.*;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 public class Board {
 
-    private Node head;
+    private ArrayList<Square> board;
 
-    private class Node {
+    private class Square {
         private Position position;
         private Piece piece;
-        private Node next;
+        private String blank;
 
-        private Node(Position p, Piece piece, Node next) {
+        private Square(Position p, Piece piece) {
             this.position = p;
             this.piece = piece;
-            this.next = next;
+        }
+
+        @Override
+        public String toString() {
+            String str;
+            if (piece == null) {
+                str = blank;
+            }
+            else str = piece.toString();
+            return str;
         }
     }
 
     public Board() {
-
-        Node temp = null;
-        head = new Node(Position.A1, new Rook(Position.A1, "white"), null);
+        board = new ArrayList<Square>();
         for (Position p : Position.values()) {
             switch (p) {
-                case A1:
-                    break; // Head initialized above
-
                 // Place white pawns
-                case A2:
-                case B2:
-                case C2:
-                case D2:
-                case E2:
-                case F2:
-                case G2:
-                case H2:
-                    temp = new Node(p, new Pawn(p, "white"), head.next);
-                    head = temp;
+                case A2: case B2: case C2: case D2: case E2: case F2: case G2: case H2:
+                    board.add(new Square(p, new Pawn(p,"white")));
                     break;
 
                 // Place black pawns
-                case A7:
-                case B7:
-                case C7:
-                case D7:
-                case E7:
-                case F7:
-                case G7:
-                case H7:
-                    temp = new Node(p, new Pawn(p, "black"), head.next);
-                    head = temp;
+                case A7: case B7: case C7: case D7: case E7: case F7: case G7: case H7:
+                    board.add(new Square(p, new Pawn(p,"black")));
                     break;
 
                 // Place white rook
-                case H1:
-                    new Node(p, new Rook(p, "white"), head.next);
-                    head = temp;
+                case A1: case H1:
+                    board.add(new Square(p, new Rook(p,"white")));
                     break;
 
                 // Place black rooks
-                case A8:
-                case H8:
-                    new Node(p, new Rook(p, "black"), head.next);
-                    head = temp;
+                case A8: case H8:
+                    board.add(new Square(p, new Rook(p,"black")));
                     break;
 
                 // Place white knights
-                case B1:
-                case G1:
-                    new Node(p, new Knight(p, "white"), head.next);
-                    head = temp;
+                case B1: case G1:
+                    board.add(new Square(p, new Knight(p,"white")));
                     break;
 
                 // Place black knights
-                case B8:
-                case G8:
-                    new Node(p, new Knight(p, "black"), head.next);
-                    head = temp;
+                case B8: case G8:
+                    board.add(new Square(p, new Knight(p,"black")));
                     break;
 
                 // Place white bishops
-                case C1:
-                case F1:
-                    new Node(p, new Bishop(p, "white"), head.next);
-                    head = temp;
+                case C1: case F1:
+                    board.add(new Square(p, new Bishop(p,"white")));
                     break;
 
                 // Place black bishops
-                case C8:
-                case F8:
-                    new Node(p, new Bishop(p, "black"), head.next);
-                    head = temp;
+                case C8: case F8:
+                    board.add(new Square(p, new Bishop(p,"black")));
                     break;
 
                 // Place white queen
                 case D1:
-                    new Node(p, new Queen(p, "white"), head.next);
-                    head = temp;
+                    board.add(new Square(p, new Queen(p,"white")));
                     break;
 
                 // Place black queen
                 case D8:
-                    new Node(p, new Queen(p, "black"), head.next);
-                    head = temp;
+                    board.add(new Square(p, new Queen(p,"black")));
                     break;
 
                 // Place white king
                 case E1:
-                    new Node(p, new King(p, "white"), head.next);
-                    head = temp;
+                    board.add(new Square(p, new King(p,"white")));
                     break;
 
                 // Place black king
                 case E8:
-                    new Node(p, new King(p, "black"), head.next);
-                    head = temp;
+                    board.add(new Square(p, new King(p,"black")));
                     break;
 
                 // Empty spots
                 default:
-                    temp = new Node(p, null, head.next);
-                    head = temp;
+                    board.add(new Square(p,null));
                     break;
+            }
+
+            // Sort the board in order of enum
+            board.sort(Comparator.comparing(s -> s.position));
+
+            // Set color of each square when blank
+            int i = 0;
+            int j = 1;
+            for (Square s : board) {
+                if (i % 2 == 0) s.blank = "  ";
+                else s.blank = "##";
+                if (j % 8 != 0) i++;
+                j++;
             }
         }
     }
 
     @Override
     public String toString() {
-        String str = null;
-        for(Position p : Position.values()) {
-
+        String str = "";
+        int i = 1;
+        int row = 8;
+        for (Square s : board) {
+            str += s.toString() + " ";
+            if (i % 8 == 0) {
+                str += Integer.toString(row) + "\n";
+                row--;
+            }
+            i++;
         }
+        str += " a  b  c  d  e  f  g  h\n";
         return str;
     }
 }

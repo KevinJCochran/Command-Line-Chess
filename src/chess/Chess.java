@@ -4,7 +4,7 @@ package chess;
 public class Chess {
     public static void main(String[] argv) {
         Board board = new Board();
-        drawBoardStart();
+        System.out.println(board);
     }
     public static void drawBoardStart() {
         System.out.println("bR bN bB bQ bK bB bN bR 8"); // 1
