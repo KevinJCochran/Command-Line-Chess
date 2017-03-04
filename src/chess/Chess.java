@@ -17,4 +17,8 @@ public class Chess {
         System.out.println("wR wN wB wQ wK wB wN wR 1"); // 8
         System.out.println(" a  b  c  d  e  f  g  h  "); // 9
     }
+
+    public static void masterAdd() {
+        System.out.println("Hi yall!");
+    }
 }
