@@ -22,5 +22,6 @@ public class Chess {
     public static void branchTest() {
         System.out.println("Hello!");
         System.out.println("Hello!");
+        System.out.println("Hello!");
     }
 }
