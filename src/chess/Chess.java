@@ -21,4 +21,10 @@ public class Chess {
     public static void masterAdd() {
         System.out.println("Hi yall!");
     }
+
+    public static void branchTest() {
+        System.out.println("Hello!");
+        System.out.println("Hello!");
+        System.out.println("Hello!");
+    }
 }
