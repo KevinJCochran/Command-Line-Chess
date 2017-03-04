@@ -17,6 +17,12 @@ public class King extends Piece{
 	public void setCurrent(Position p) {
 		
 	}
-	
+
+	public String toString() {
+		String str = null;
+		if (team.equalsIgnoreCase("white")) str = "wK";
+		else str = "bK";
+		return str;
+	}
 
 }

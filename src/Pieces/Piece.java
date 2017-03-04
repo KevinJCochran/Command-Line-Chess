@@ -18,5 +18,7 @@ public abstract class Piece {
     public abstract void popMoves();
     public abstract void setCurrent(Position p);
 
-    // TODO write toString methods
+    public String toString() {
+        return "??";
+    }
 }

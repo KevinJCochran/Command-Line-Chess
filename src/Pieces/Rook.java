@@ -19,6 +19,13 @@ public class Rook extends Piece{
 		
 		
 	}
+
+	public String toString() {
+		String str = null;
+		if (team.equalsIgnoreCase("white")) str = "wR";
+		else str = "bR";
+		return str;
+	}
 	
 
 }

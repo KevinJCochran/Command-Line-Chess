@@ -10,15 +10,17 @@ public class Pawn extends Piece {
 
 	@Override
 	public void popMoves() {
-		
-	
-		
 	}
 
 	@Override
 	public void setCurrent(Position p) {
-		
-		
+	}
+
+	public String toString() {
+		String str = null;
+		if (team.equalsIgnoreCase("white")) str = "wp";
+		else str = "bp";
+		return str;
 	}
 
 }

@@ -20,4 +20,11 @@ public class Queen extends Piece {
 		
 	}
 
+	public String toString() {
+		String str = null;
+		if (team.equalsIgnoreCase("white")) str = "wQ";
+		else str = "bQ";
+		return str;
+	}
+
 }

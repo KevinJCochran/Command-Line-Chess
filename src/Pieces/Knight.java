@@ -17,4 +17,11 @@ public class Knight extends Piece{
     public void setCurrent(Position p) {
 
     }
+
+    public String toString() {
+        String str = null;
+        if (team.equalsIgnoreCase("white")) str = "wN";
+        else str = "bN";
+        return str;
+    }
 }
