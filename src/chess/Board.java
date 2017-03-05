@@ -103,7 +103,7 @@ public class Board {
             // Sort the board in order of enum
             board.sort(Comparator.comparing(s -> s.position));
 
-            // Set color of each square when blank
+            // Set color that each square will be when blank
             int i = 0;
             int j = 1;
             for (Square s : board) {
@@ -113,6 +113,10 @@ public class Board {
                 j++;
             }
         }
+    }
+
+    public boolean move(Position p1, Position p2) {
+        return true;
     }
 
     @Override
