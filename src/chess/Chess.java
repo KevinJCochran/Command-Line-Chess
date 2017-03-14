@@ -13,6 +13,10 @@ public class Chess {
         String sFrom = stdin.next();
         String sTo = stdin.next();
 
+        Position from = toPosition(sFrom);
+        Position to = toPosition(sTo);
+
+        System.out.println("From: "+from+", To: "+to);
     }
     public static void drawBoardStart() {
         System.out.println("bR bN bB bQ bK bB bN bR 8"); // 1

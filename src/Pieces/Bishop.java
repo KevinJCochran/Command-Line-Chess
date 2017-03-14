@@ -1,6 +1,9 @@
 package Pieces;
 
+import chess.Board;
 import chess.Position;
+
+import java.util.List;
 
 public class Bishop extends Piece {
 
@@ -9,7 +12,7 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public void popMoves() {
+    public void popMoves(List<Board.Square> board) {
 
     }
 

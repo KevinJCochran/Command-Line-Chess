@@ -9,10 +9,10 @@ public class Board {
 
     private ArrayList<Square> board;
 
-    private class Square {
-        private Position position;
-        private Piece piece;
-        private String blank;
+    public class Square {
+        public Position position;
+        public Piece piece;
+        public String blank;
 
         private Square(Position p, Piece piece) {
             this.position = p;

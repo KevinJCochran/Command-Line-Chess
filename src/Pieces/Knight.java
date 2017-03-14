@@ -1,6 +1,9 @@
 package Pieces;
 
+import chess.Board;
 import chess.Position;
+
+import java.util.List;
 
 public class Knight extends Piece{
 
@@ -9,13 +12,18 @@ public class Knight extends Piece{
     }
 
     @Override
-    public void popMoves() {
+    public void popMoves(List<Board.Square> board) {
 
     }
 
     @Override
     public void setCurrent(Position p) {
 
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     public String toString() {
