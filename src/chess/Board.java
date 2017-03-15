@@ -127,7 +127,7 @@ public class Board {
             if (s.position == p2) s2 = s;
         }
         // Determine if p2 is on list on valid moves for p1 piece
-        if (s1.piece.isValid(p2)) {
+        if (s1.piece.isValid(p2, board)) {
             s2.piece = s1.piece;        // move piece
             s1.piece = null;            // set old square to null
             s2.piece.setCurrent(p2);    // update piece

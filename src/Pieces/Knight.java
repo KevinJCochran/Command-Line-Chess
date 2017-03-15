@@ -13,12 +13,48 @@ public class Knight extends Piece{
 
     @Override
     public void popMoves(List<Board.Square> board) {
-        // TODO write popMoves Knight
+        validMoves.clear();
+        /*
+        There are 8 possible moves for the knight:
+        [0]: x+1, y+2   [4]: x-1, y-2
+        [1]: x+2, y+1   [5]: x-2, y-1
+        [2]: x+2, y-1   [6]: x-2, y+1
+        [3]: x+1, y-2   [7]: x-1, y+2
+         */
+        Position plist[] = {null, null, null, null, null, null, null, null};
+        for (Position p : Position.values()) {
+            if (p.coordEquals(current.x+1, current.y+2))
+                plist[0] = p;
+            if (p.coordEquals(current.x+2, current.y+1))
+                plist[1] = p;
+            if (p.coordEquals(current.x+2, current.y-1))
+                plist[2] = p;
+            if (p.coordEquals(current.x+1, current.y-2))
+                plist[3] = p;
+            if (p.coordEquals(current.x-1, current.y-2))
+                plist[4] = p;
+            if (p.coordEquals(current.x-2, current.y-1))
+                plist[5] = p;
+            if (p.coordEquals(current.x-2, current.y+1))
+                plist[6] = p;
+            if (p.coordEquals(current.x-1, current.y+2))
+                plist[7] = p;
+        }
+        // Fill list with valid moves
+        for (Board.Square s : board) {
+            for (Position p : plist) {
+                if (s.piece == null) {
+                    if (s.position == p)
+                        validMoves.add(p);
+                }else if (s.position == p && s.piece.team != this.team)
+                    validMoves.add(p);
+            }
+        }
     }
 
     @Override
     public void setCurrent(Position p) {
-
+        this.current = p;
     }
 
     @Override

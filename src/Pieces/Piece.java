@@ -21,7 +21,8 @@ public abstract class Piece {
     public abstract void popMoves(List<Board.Square> board);
     public abstract void setCurrent(Position p);
 
-    public boolean isValid(Position p) {
+    public boolean isValid(Position p, List<Board.Square> board) {
+        popMoves(board);
         return validMoves.contains(p);
     }
 

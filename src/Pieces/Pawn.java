@@ -47,12 +47,12 @@ public class Pawn extends Piece {
                 validMoves.add(plist[0]);
             }
             if (s.position == plist[2] && s.piece != null) { // Can attack left
-                if (s.piece.team != this.team) {
+                if (!s.piece.team.equals(this.team)) {
                     validMoves.add(plist[2]);
                 }
             }
             if (s.position == plist[3] && s.piece != null) { // Can attack right
-                if (s.piece.team != this.team) {
+                if (!s.piece.team.equals(this.team)) {
                     validMoves.add(plist[3]);
                 }
             }
@@ -64,7 +64,6 @@ public class Pawn extends Piece {
                 }
             }
         }
-        return;
     }
 
 	@Override
