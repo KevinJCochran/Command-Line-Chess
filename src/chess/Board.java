@@ -99,24 +99,47 @@ public class Board {
                     board.add(new Square(p,null));
                     break;
             }
+        }
+        // Sort the board in order of enum
+        board.sort(Comparator.comparing(s -> s.position));
 
-            // Sort the board in order of enum
-            board.sort(Comparator.comparing(s -> s.position));
+        // Set color that each square will be when blank
+        int i = 0;
+        int j = 1;
+        for (Square s : board) {
+            if (i % 2 == 0) s.blank = "  ";
+            else s.blank = "##";
+            if (j % 8 != 0) i++;
+            j++;
+        }
 
-            // Set color that each square will be when blank
-            int i = 0;
-            int j = 1;
-            for (Square s : board) {
-                if (i % 2 == 0) s.blank = "  ";
-                else s.blank = "##";
-                if (j % 8 != 0) i++;
-                j++;
-            }
+        // Populate the valid moves of all pieces
+        for (Square s : board) {
+            if (s.piece != null) s.piece.popMoves(board);
         }
     }
 
     public boolean move(Position p1, Position p2) {
-        return true;
+        // Find p1 info
+        Square s1 = null ,s2 = null;
+        for (Square s : board) {
+            if (s.position == p1) s1 = s;
+            if (s.position == p2) s2 = s;
+        }
+        // Determine if p2 is on list on valid moves for p1 piece
+        if (s1.piece.isValid(p2)) {
+            s2.piece = s1.piece;        // move piece
+            s1.piece = null;            // set old square to null
+            s2.piece.setCurrent(p2);    // update piece
+            s2.piece.popMoves(board);   // Populate new list of valid moves
+            return true;
+        }
+        else return false;
+    }
+
+    public boolean isInCheck() {
+        // TODO write isInCheck method
+        return false;
     }
 
     @Override

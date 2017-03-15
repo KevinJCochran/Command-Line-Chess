@@ -5,29 +5,36 @@ import java.util.Scanner;
 
 public class Chess {
     public static void main(String[] argv) {
+
+        // Create board and initialize it
         Board board = new Board();
-        System.out.println(board);
 
+        // Create scanner to read from command line
         Scanner stdin = new Scanner(System.in);
-        System.out.print("White's move: ");
-        String sFrom = stdin.next();
-        String sTo = stdin.next();
 
-        Position from = toPosition(sFrom);
-        Position to = toPosition(sTo);
+        // Start loop
+        while (true) {
+            System.out.println(board);
+            System.out.print("White's move: ");
+            Position from = toPosition(stdin.next());
+            Position to = toPosition(stdin.next());
+            if (!board.move(from,to)) System.out.println("Invalid move");
+            // TODO write main game loop
+        }
 
-        System.out.println("From: "+from+", To: "+to);
     }
-    public static void drawBoardStart() {
-        System.out.println("bR bN bB bQ bK bB bN bR 8"); // 1
-        System.out.println("bp bp bp bp bp bp bp bp 7"); // 2
-        System.out.println("   ##    ##    ##    ## 6"); // 3
-        System.out.println("##    ##    ##    ##    5"); // 4
-        System.out.println("   ##    ##    ##    ## 4"); // 5
-        System.out.println("##    ##    ##    ##    3"); // 6
-        System.out.println("wp wp wp wp wp wp wp wp 2"); // 7
-        System.out.println("wR wN wB wQ wK wB wN wR 1"); // 8
-        System.out.println(" a  b  c  d  e  f  g  h  "); // 9
+    public static String drawBoardStart() {
+        String str =
+        "bR bN bB bQ bK bB bN bR 8\n"+
+        "bp bp bp bp bp bp bp bp 7\n"+
+        "   ##    ##    ##    ## 6\n"+
+        "##    ##    ##    ##    5\n"+
+        "   ##    ##    ##    ## 4\n"+
+        "##    ##    ##    ##    3\n"+
+        "wp wp wp wp wp wp wp wp 2\n"+
+        "wR wN wB wQ wK wB wN wR 1\n"+
+        " a  b  c  d  e  f  g  h  \n";
+        return str;
     }
 
     public static Position toPosition(String s) {

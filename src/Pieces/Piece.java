@@ -2,6 +2,8 @@ package Pieces;
 
 import chess.Board;
 import chess.Position;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Piece {
@@ -13,10 +15,15 @@ public abstract class Piece {
     public Piece(Position p, String t) {
         this.current = p;
         this.team = t;
+        validMoves = new ArrayList<>();
+
     }
-    // TODO write popMoves
     public abstract void popMoves(List<Board.Square> board);
     public abstract void setCurrent(Position p);
+
+    public boolean isValid(Position p) {
+        return validMoves.contains(p);
+    }
 
     public String toString() {
         return "??";
