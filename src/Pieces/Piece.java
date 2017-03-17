@@ -26,6 +26,26 @@ public abstract class Piece {
         return validMoves.contains(p);
     }
 
+    protected void addValid(List<Board.Square> board, Position list[]) {
+        Board.Square temp = null;
+        if (list[0] != null) {
+            for (int i = 0; i < 7; i++) {
+                for (Board.Square s : board) {
+                    if (s.position == list[i]) temp = s;
+                }
+                if (temp == null) return; // Ensure that a square was found
+                if (temp.piece == null) {
+                    validMoves.add(list[i]);
+                } else if (!temp.piece.team.equals(this.team)) {
+                    validMoves.add(list[i]);
+                    break;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+
     public String toString() {
         return "??";
     }

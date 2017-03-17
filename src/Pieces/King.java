@@ -28,4 +28,6 @@ public class King extends Piece{
 		return str;
 	}
 
+	// TODO Handle castling move
+
 }

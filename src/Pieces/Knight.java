@@ -57,11 +57,6 @@ public class Knight extends Piece{
         this.current = p;
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
     public String toString() {
         String str = null;
         if (team.equalsIgnoreCase("white")) str = "wN";
