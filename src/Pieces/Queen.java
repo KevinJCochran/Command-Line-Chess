@@ -15,7 +15,7 @@ public class Queen extends Piece {
 	public void popMoves(List<Board.Square> board) {
 	    validMoves.clear();
 	    /*
-	    The Queen is a combonation of Rook and Bishop class. It has 8 directions
+	    The Queen is a combination of Rook and Bishop class. It has 8 directions
 	    it can move in: up, down, left, right, upLeft, upRight, downLeft, downRight
 	     */
         Position up[] = new Position[7];

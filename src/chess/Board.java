@@ -138,7 +138,7 @@ public class Board {
     }
 
     public boolean isInCheck() {
-        // TODO implement isInCheck method
+        // TODO implement check
         // TODO implement checkmate
         return false;
     }
