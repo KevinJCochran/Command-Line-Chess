@@ -16,6 +16,7 @@ public class Pawn extends Piece {
 
 	@Override
 	public void popMoves(List<Board.Square> board) {
+	    // TODO handle En passant move
 	    validMoves.clear();
         /*
         First make list of valid positions based on piece(pawn).

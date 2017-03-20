@@ -120,6 +120,7 @@ public class Board {
     }
 
     public boolean move(Position p1, Position p2) {
+        King king = null;
         // Find p1 info
         Square s1 = null ,s2 = null;
         for (Square s : board) {
@@ -130,7 +131,11 @@ public class Board {
         if (s1.piece.isValid(p2, board)) {
             s2.piece = s1.piece;        // move piece
             s1.piece = null;            // set old square to null
-            s2.piece.setCurrent(p2);    // update piece
+            if (s2.piece instanceof King) {
+                king = (King)(s2.piece);
+                king.setCurrent(p2,board);
+            } else
+                s2.piece.setCurrent(p2);
             s2.piece.popMoves(board);   // Populate new list of valid moves
             return true;
         }

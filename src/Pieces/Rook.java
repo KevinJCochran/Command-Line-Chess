@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Rook extends Piece{
 
+    public boolean firstMove = true;
+
 	public Rook(Position p, String t) {
 		super(p, t);
 	}
@@ -51,6 +53,7 @@ public class Rook extends Piece{
 	@Override
 	public void setCurrent(Position p) {
         current = p;
+        firstMove = false;
 	}
 
 	public String toString() {

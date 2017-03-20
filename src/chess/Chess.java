@@ -24,6 +24,7 @@ public class Chess {
 
     }
     public static String drawBoardStart() {
+        // TODO check that board is correctly drawn
         String str =
         "bR bN bB bQ bK bB bN bR 8\n"+
         "bp bp bp bp bp bp bp bp 7\n"+
