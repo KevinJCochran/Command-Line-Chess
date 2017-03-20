@@ -26,6 +26,13 @@ public abstract class Piece {
         return validMoves.contains(p);
     }
 
+    public boolean isAttacking(Position p) {
+        if (this.validMoves.contains(p))
+            return true;
+        else
+            return false;
+    }
+
     protected void addValid(List<Board.Square> board, Position list[]) {
         Board.Square temp = null;
         if (list[0] != null) {

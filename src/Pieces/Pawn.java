@@ -72,6 +72,23 @@ public class Pawn extends Piece {
 	    current = p;
 	}
 
+	@Override
+	public boolean isAttacking(Position p) {
+	    if (p == null) return false;
+	    if (this.team.equals("white")) {
+            if (p.coordEquals(current.x + 1, current.y + 1))
+                return true;
+            if (p.coordEquals(current.x - 1, current.y + 1))
+                return true;
+        } else {
+            if (p.coordEquals(current.x+1,current.y-1))
+                return true;
+            if (p.coordEquals(current.x-1,current.y-1))
+                return true;
+        }
+        return false;
+    }
+
 	public String toString() {
 		String str = null;
 		if (team.equalsIgnoreCase("white")) str = "wp";

@@ -43,8 +43,7 @@ public class King extends Piece{
         for (int i = 0; i < 8; i++) {
             for (Board.Square s : board) {
                 if (s.piece != null) {
-                    if (!s.piece.team.equals(this.team) && s.piece.validMoves.contains(plist[i])) {
-                        // TODO handle pawn situation
+                    if (!s.piece.team.equals(this.team) && s.piece.isAttacking(plist[i])) {
                         plist[i] = null;
                     }
                 }
