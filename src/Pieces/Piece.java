@@ -8,9 +8,9 @@ import java.util.List;
 
 public abstract class Piece {
 
-    protected List<Position> validMoves;
-    protected Position current;
-    protected String team;
+    public List<Position> validMoves;
+    public Position current;
+    public String team;
 
     public Piece(Position p, String t) {
         this.current = p;

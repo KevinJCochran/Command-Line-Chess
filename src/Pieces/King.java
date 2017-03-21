@@ -204,6 +204,53 @@ public class King extends Piece{
 		firstMove = false;
 	}
 
+    public boolean inCheck(List<Board.Square> board) {
+        for (Board.Square s : board) {
+            if (s.piece != null) {
+                s.piece.popMoves(board);
+                if (s.piece.isAttacking(current)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean inCheckmate(List<Board.Square> board, Board b) {
+	    // First check if king can move to a valid position
+	    boolean kingCanMove = true;
+	    boolean canBeSaved = true;
+	    this.popMoves(board);
+	    if (validMoves.isEmpty()) {
+	        kingCanMove = false;
+        } else {
+	        kingCanMove = true;
+        }
+        // Next check if a piece can move and save the king.
+        // The king is saved if moving another piece causes the
+        // king to no longer be in check.
+        for (Board.Square s : board) {
+            if (s.piece != null) {
+                for (Position p : s.piece.validMoves) {
+                    b.forceMove(s.position, p);
+                    if (this.inCheck(board)) {
+                        b.forceMove(p,s.position);
+                        canBeSaved = false;
+                    } else {
+                        b.forceMove(p,s.position);
+                        canBeSaved = true;
+                        b.validInCheckMoves.add(new Board.ChessMove(s.position,p));
+                    }
+                }
+            }
+        }
+        if (kingCanMove || canBeSaved) {
+	        return true;
+        } else {
+	        return false;
+        }
+    }
+
     @Override
     public void setCurrent(Position p) {
     }

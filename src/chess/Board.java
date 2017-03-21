@@ -8,6 +8,19 @@ import java.util.Comparator;
 public class Board {
 
     private ArrayList<Square> board;
+    public ArrayList<ChessMove> validInCheckMoves;
+    public boolean check = false;
+    public boolean checkmate = false;
+
+    public static class ChessMove {
+        public Position from;
+        public Position to;
+
+        public ChessMove(Position from, Position to) {
+            this.from = from;
+            this.to = to;
+        }
+    }
 
     public class Square {
         public Position position;
@@ -121,8 +134,8 @@ public class Board {
 
     public boolean move(Position p1, Position p2) {
         King king = null;
-        // Find p1 info
-        Square s1 = null ,s2 = null;
+        // Find p1 and p2 squares
+        Square s1 = null, s2 = null;
         for (Square s : board) {
             if (s.position == p1) s1 = s;
             if (s.position == p2) s2 = s;
@@ -132,20 +145,26 @@ public class Board {
             s2.piece = s1.piece;        // move piece
             s1.piece = null;            // set old square to null
             if (s2.piece instanceof King) {
-                king = (King)(s2.piece);
-                king.setCurrent(p2,board);
+                king = (King) (s2.piece);
+                king.setCurrent(p2, board);
             } else
                 s2.piece.setCurrent(p2);
             s2.piece.popMoves(board);   // Populate new list of valid moves
-            return true;
         }
-        else return false;
+        return true;
     }
 
-    public boolean isInCheck() {
-        // TODO implement check
-        // TODO implement checkmate
-        return false;
+    public void forceMove(Position p1, Position p2) {
+        // Find p1 and p2 squares
+        Square s1 = null, s2 = null;
+        for (Square s : board) {
+            if (s.position == p1) s1 = s;
+            if (s.position == p2) s2 = s;
+        }
+        // Move the piece WITHOUT checking if valid
+        s2.piece = s1.piece;
+        s1.piece = null;
+        s2.piece.setCurrent(p2);
     }
 
     @Override
