@@ -2,6 +2,7 @@ package Pieces;
 
 import chess.Board;
 import chess.Position;
+import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,10 @@ public abstract class Piece {
     }
     public abstract void popMoves(List<Board.Square> board);
     public abstract void setCurrent(Position p);
+
+    public void tempCurrent(Position p) {
+        this.current = p;
+    }
 
     public boolean isValid(Position p, List<Board.Square> board) {
         popMoves(board);

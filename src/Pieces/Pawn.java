@@ -8,10 +8,11 @@ import java.util.List;
 
 public class Pawn extends Piece {
 
-    private boolean firstMove = true;
+    private boolean firstMove;
 
 	public Pawn(Position p, String t) {
 		super(p, t);
+		firstMove = true;
 	}
 
 	@Override

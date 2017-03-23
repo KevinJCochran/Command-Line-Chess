@@ -9,8 +9,10 @@ public class Board {
 
     private ArrayList<Square> board;
     public ArrayList<ChessMove> validInCheckMoves;
-    public boolean check = false;
+    public boolean whiteInCheck = false;
+    public boolean blackInCheck = false;
     public boolean checkmate = false;
+    public Piece savedPiece;
 
     public static class ChessMove {
         public Position from;
@@ -44,7 +46,8 @@ public class Board {
     }
 
     public Board() {
-        board = new ArrayList<Square>();
+        board = new ArrayList<>();
+        validInCheckMoves = new ArrayList<>();
         for (Position p : Position.values()) {
             switch (p) {
                 // Place white pawns
@@ -142,29 +145,64 @@ public class Board {
         }
         // Determine if p2 is on list on valid moves for p1 piece
         if (s1.piece.isValid(p2, board)) {
-            s2.piece = s1.piece;        // move piece
-            s1.piece = null;            // set old square to null
+            s2.piece = s1.piece;
+            s1.piece = null;
+
+            // ----- Hacky way of making King class work ------
             if (s2.piece instanceof King) {
                 king = (King) (s2.piece);
                 king.setCurrent(p2, board);
             } else
                 s2.piece.setCurrent(p2);
-            s2.piece.popMoves(board);   // Populate new list of valid moves
+            // ------------------------------------------------
+
+            s2.piece.popMoves(board);
+            // Now determine if board in check/checkmate and set flags accordingly
+            King whiteKing = null;
+            King blackKing = null;
+            for (Square s : board) {
+                if (s.piece != null) {
+                    if (s.piece instanceof King && s.piece.team.equals("white")) {
+                        whiteKing = (King)s.piece;
+                    } else if (s.piece instanceof King && s.piece.team.equals("black")) {
+                        blackKing = (King)s.piece;
+                    }
+                }
+            }
+            if (whiteKing != null && blackKing != null) {
+                whiteInCheck = whiteKing.inCheck(board);
+                blackInCheck = blackKing.inCheck(board);
+                checkmate = (whiteKing.inCheckmate(board,this) || blackKing.inCheckmate(board,this));
+            }
+            if (whiteInCheck || blackInCheck || checkmate)
+                return false;
+        } else {
+            return false;
         }
         return true;
     }
 
-    public void forceMove(Position p1, Position p2) {
-        // Find p1 and p2 squares
-        Square s1 = null, s2 = null;
+    public void testMove(Position p, Piece piece) {
+        // Find square of p
+        Square square = null;
         for (Square s : board) {
-            if (s.position == p1) s1 = s;
-            if (s.position == p2) s2 = s;
+            if (s.position == p) square = s;
         }
-        // Move the piece WITHOUT checking if valid
-        s2.piece = s1.piece;
-        s1.piece = null;
-        s2.piece.setCurrent(p2);
+        // Save the old piece
+        savedPiece = square.piece;
+        square.piece = piece;
+        //square.piece.tempCurrent(p);
+    }
+
+    public void revert(Position p) {
+        // Find square of p
+        Square square = null;
+        for (Square s : board) {
+            if (s.position == p) square = s;
+        }
+        // Revert Square piece
+        square.piece = savedPiece;
+        savedPiece = null;
     }
 
     @Override

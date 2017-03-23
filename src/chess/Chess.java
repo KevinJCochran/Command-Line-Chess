@@ -6,6 +6,9 @@ import java.util.Scanner;
 public class Chess {
     public static void main(String[] argv) {
 
+        // TODO write main game loop
+        // TODO only allow valid moves while in check
+
         // Create board and initialize it
         Board board = new Board();
 
@@ -13,13 +16,49 @@ public class Chess {
         Scanner stdin = new Scanner(System.in);
 
         // Start loop
+        System.out.println(board);
+        boolean invalidMove;
         while (true) {
-            System.out.println(board);
-            System.out.print("White's move: ");
-            Position from = toPosition(stdin.next());
-            Position to = toPosition(stdin.next());
-            if (!board.move(from,to)) System.out.println("Invalid move");
-            // TODO write main game loop
+            invalidMove = true;
+            while (invalidMove) {
+                System.out.print("White's move: ");
+                Position from = toPosition(stdin.next());
+                Position to = toPosition(stdin.next());
+                if (!board.move(from,to)) {
+                    if (board.checkmate) {
+                        System.out.println("Checkmate\nWhite wins");
+                        return;
+                    } else if (board.blackInCheck) {
+                        System.out.println(board);
+                        System.out.println("Check\n");
+                        invalidMove = false;
+                    } else
+                        System.out.println("Illegal move, try again");
+                } else {
+                    invalidMove = false;
+                    System.out.println(board);
+                }
+            }
+            invalidMove = true;
+            while (invalidMove) {
+                System.out.print("Black's move: ");
+                Position from = toPosition(stdin.next());
+                Position to = toPosition(stdin.next());
+                if (!board.move(from,to)) {
+                    if (board.checkmate) {
+                        System.out.println("Checkmate\nBlack wins");
+                        return;
+                    } else if (board.whiteInCheck) {
+                        System.out.println(board);
+                        System.out.println("Check\n");
+                        invalidMove = false;
+                    } else
+                        System.out.println("Illegal move, try again");
+                } else {
+                    invalidMove = false;
+                    System.out.println(board);
+                }
+            }
         }
 
     }
