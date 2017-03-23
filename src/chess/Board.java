@@ -5,8 +5,15 @@ import Pieces.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * Maintains the game board with all its pieces.
+ * @author Kevin
+ */
 public class Board {
 
+    /**
+     * List of squares on board
+     */
     private ArrayList<Square> board;
     public ArrayList<ChessMove> validInCheckMoves;
     public boolean whiteInCheck = false;
@@ -225,7 +232,7 @@ public class Board {
 
     @Override
     public String toString() {
-        String str = "";
+        String str = "\n";
         int i = 1;
         int row = 8;
         for (Square s : board) {

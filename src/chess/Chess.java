@@ -3,7 +3,16 @@ package chess;
 
 import java.util.Scanner;
 
+/**
+ * Main class that is run. controls the turns, prompts the user, and handles input.
+ *
+ * @author Kevin Cochran
+ */
 public class Chess {
+    /**
+     * Main function that is run initially.
+     * @param argv NO ARGS
+     */
     public static void main(String[] argv) {
 
         // Create board and initialize it
@@ -14,14 +23,21 @@ public class Chess {
 
         // Start loop
         System.out.println(board);
-        String arg;
+        String arg, first;
         boolean invalidMove, draw = false;
         while (true) {
             invalidMove = true;
             while (invalidMove) {
                 System.out.print("White's move: ");
-                Position from = toPosition(stdin.next());
+                first = stdin.next();
+                if (first.equals("resign")) {
+                    return;
+                }if (first.equals("draw?")) {
+                    first = stdin.next();
+                }
+                Position from = toPosition(first);
                 if (from == null) {
+                    System.out.println("\nDraw\n");
                     return;
                 }
                 Position to = toPosition(stdin.next());
@@ -43,10 +59,14 @@ public class Chess {
             invalidMove = true;
             while (invalidMove) {
                 System.out.print("Black's move: ");
-                Position from = toPosition(stdin.next());
-                if (from == null) {
+                first = stdin.next();
+                if (first.equals("resign")) {
                     return;
+                }if (first.equals("draw?")) {
+                    first = stdin.next();
                 }
+                Position from = toPosition(first);
+                if (from == null) return;
                 Position to = toPosition(stdin.next());
                 if (!board.move(from,to)) {
                     if (board.checkmate) {
@@ -66,21 +86,12 @@ public class Chess {
         }
 
     }
-    public static String drawBoardStart() {
-        // TODO check that board is correctly drawn
-        String str =
-        "bR bN bB bQ bK bB bN bR 8\n"+
-        "bp bp bp bp bp bp bp bp 7\n"+
-        "   ##    ##    ##    ## 6\n"+
-        "##    ##    ##    ##    5\n"+
-        "   ##    ##    ##    ## 4\n"+
-        "##    ##    ##    ##    3\n"+
-        "wp wp wp wp wp wp wp wp 2\n"+
-        "wR wN wB wQ wK wB wN wR 1\n"+
-        " a  b  c  d  e  f  g  h  \n";
-        return str;
-    }
 
+    /**
+     * Will take a string and convert it to position if available.
+     * @param s String to convert.
+     * @return Position if possible.
+     */
     public static Position toPosition(String s) {
         for (Position p : Position.values()) {
             if (s.equals(p.getValue())) return p;
