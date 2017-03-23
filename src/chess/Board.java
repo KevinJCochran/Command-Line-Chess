@@ -13,6 +13,8 @@ public class Board {
     public boolean blackInCheck = false;
     public boolean checkmate = false;
     public Piece savedPiece;
+    public String turn;
+
 
     public static class ChessMove {
         public Position from;
@@ -133,6 +135,7 @@ public class Board {
         for (Square s : board) {
             if (s.piece != null) s.piece.popMoves(board);
         }
+        turn = "white";
     }
 
     public boolean move(Position p1, Position p2) {
@@ -143,6 +146,8 @@ public class Board {
             if (s.position == p1) s1 = s;
             if (s.position == p2) s2 = s;
         }
+        if (s1.piece == null) return false;
+        if (!turn.equals(s1.piece.team)) return false;
         // Determine if p2 is on list on valid moves for p1 piece
         if (s1.piece.isValid(p2, board)) {
             s2.piece = s1.piece;
@@ -174,10 +179,23 @@ public class Board {
                 blackInCheck = blackKing.inCheck(board);
                 checkmate = (whiteKing.inCheckmate(board,this) || blackKing.inCheckmate(board,this));
             }
-            if (whiteInCheck || blackInCheck || checkmate)
+            if (whiteInCheck || blackInCheck || checkmate) {
+                if (turn.equals("white")) {
+                    turn = "black";
+                }
+                else if (turn.equals("black")) {
+                    turn = "white";
+                }
                 return false;
+            }
         } else {
             return false;
+        }
+        if (turn.equals("white")) {
+            turn = "black";
+        }
+        else if (turn.equals("black")) {
+            turn = "white";
         }
         return true;
     }

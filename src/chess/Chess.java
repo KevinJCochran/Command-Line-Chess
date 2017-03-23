@@ -6,9 +6,6 @@ import java.util.Scanner;
 public class Chess {
     public static void main(String[] argv) {
 
-        // TODO write main game loop
-        // TODO only allow valid moves while in check
-
         // Create board and initialize it
         Board board = new Board();
 
@@ -17,12 +14,16 @@ public class Chess {
 
         // Start loop
         System.out.println(board);
-        boolean invalidMove;
+        String arg;
+        boolean invalidMove, draw = false;
         while (true) {
             invalidMove = true;
             while (invalidMove) {
                 System.out.print("White's move: ");
                 Position from = toPosition(stdin.next());
+                if (from == null) {
+                    return;
+                }
                 Position to = toPosition(stdin.next());
                 if (!board.move(from,to)) {
                     if (board.checkmate) {
@@ -43,6 +44,9 @@ public class Chess {
             while (invalidMove) {
                 System.out.print("Black's move: ");
                 Position from = toPosition(stdin.next());
+                if (from == null) {
+                    return;
+                }
                 Position to = toPosition(stdin.next());
                 if (!board.move(from,to)) {
                     if (board.checkmate) {
