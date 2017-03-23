@@ -5,12 +5,25 @@ import chess.Position;
 
 import java.util.List;
 
+/**
+ * Knight class
+ * @author Kevin
+ */
 public class Knight extends Piece{
 
+    /**
+     * Create the piece.
+     * @param p Where
+     * @param t Team
+     */
     public Knight(Position p, String t) {
         super(p, t);
     }
 
+    /**
+     * Populate moves of pawn in validMoves list.
+     * @param board board to use.
+     */
     @Override
     public void popMoves(List<Board.Square> board) {
         validMoves.clear();
@@ -52,11 +65,19 @@ public class Knight extends Piece{
         }
     }
 
+    /**
+     * Set new position and sets firstMove to false.
+     * @param p Where to move.
+     */
     @Override
     public void setCurrent(Position p) {
         this.current = p;
     }
 
+    /**
+     * Create string rep of piece.
+     * @return String
+     */
     public String toString() {
         String str = null;
         if (team.equalsIgnoreCase("white")) str = "wN";

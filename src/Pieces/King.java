@@ -7,14 +7,27 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * King class
+ * @author Kevin
+ */
 public class King extends Piece{
 
     private boolean firstMove = true;
 
+    /**
+     * Create the piece.
+     * @param p Where
+     * @param t Team
+     */
 	public King(Position p, String t) {
 		super(p, t);
 	}
 
+	/**
+     * Populate moves of pawn in validMoves list.
+     * @param board board to use
+    */
 	@Override
 	public void popMoves(List<Board.Square> board) {
 	    validMoves.clear();
@@ -150,6 +163,11 @@ public class King extends Piece{
         }
 	}
 
+    /**
+     * Set current with board
+     * @param p
+     * @param board
+     */
 	public void setCurrent(Position p, List<Board.Square> board) {
 	    if (this.team.equals("white") && firstMove) {
 	        // if castling king side

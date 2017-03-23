@@ -5,12 +5,25 @@ import chess.Position;
 
 import java.util.List;
 
+/**
+ * Bishop class
+ * @author Kevin
+ */
 public class Bishop extends Piece {
 
+    /**
+     * Create the piece.
+     * @param p Where
+     * @param t Team
+     */
     public Bishop(Position p, String t) {
         super(p, t);
     }
 
+    /**
+     * Populate moves of pawn in validMoves list.
+     * @param board board to use.
+     */
     @Override
     public void popMoves(List<Board.Square> board) {
         validMoves.clear();
@@ -48,11 +61,15 @@ public class Bishop extends Piece {
         addValid(board,downRight);
     }
 
+
     @Override
     public void setCurrent(Position p) {
         this.current = p;
     }
 
+    /**
+     * Just a toString
+     */
     @Override
     public String toString() {
         String str = null;

@@ -1,5 +1,8 @@
 package chess;
 
+/**
+ * Enum representing each position on board.
+ */
 public enum Position {
     A8("a8",1,8), B8("b8",2,8), C8("c8",3,8), D8("d8",4,8), E8("e8",5,8), F8("f8",6,8), G8("g8",7,8), H8("h8",8,8),
     A7("a7",1,7), B7("b7",2,7), C7("c7",3,7), D7("d7",4,7), E7("e7",5,7), F7("f7",6,7), G7("g7",7,7), H7("h7",8,7),
@@ -12,16 +15,33 @@ public enum Position {
 
     public String value;
     public int x,y;
+
+    /**
+     * init each position
+     * @param value string rep
+     * @param x x-coordinate
+     * @param y y-coordinate
+     */
     Position(String value, int x, int y) {
         this.value = value;
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * get string value
+     * @return String
+     */
     public String getValue() {
         return value;
     }
 
+    /**
+     * Will determine if coordinates are equal to these.
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @return true if equal
+     */
     public boolean coordEquals(int x, int y) {
         return (this.x == x && this.y == y);
     }

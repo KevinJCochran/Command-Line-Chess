@@ -5,14 +5,27 @@ import chess.Position;
 
 import java.util.List;
 
+/**
+ * Rook class
+ * @author Kevin
+ */
 public class Rook extends Piece{
 
     public boolean firstMove = true;
 
+    /**
+     * Create the piece.
+     * @param p Where
+     * @param t Team
+     */
 	public Rook(Position p, String t) {
 		super(p, t);
 	}
 
+    /**
+     * Populate moves of pawn in validMoves list.
+     * @param board board to use.
+     */
 	@Override
 	public void popMoves(List<Board.Square> board) {
 		validMoves.clear();
@@ -50,12 +63,19 @@ public class Rook extends Piece{
         addValid(board,right);
     }
 
+    /**
+     * set current
+     * @param p Where to move.
+     */
 	@Override
 	public void setCurrent(Position p) {
         current = p;
         firstMove = false;
 	}
 
+    /**
+     * Just a toString
+     */
 	public String toString() {
 		String str = null;
 		if (team.equalsIgnoreCase("white")) str = "wR";

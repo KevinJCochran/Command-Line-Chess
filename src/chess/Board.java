@@ -11,9 +11,6 @@ import java.util.Comparator;
  */
 public class Board {
 
-    /**
-     * List of squares on board
-     */
     private ArrayList<Square> board;
     public ArrayList<ChessMove> validInCheckMoves;
     public boolean whiteInCheck = false;
@@ -22,7 +19,10 @@ public class Board {
     public Piece savedPiece;
     public String turn;
 
-
+    /**
+     * Class to help populate list of valid moves if in check
+     * @author Kevin
+     */
     public static class ChessMove {
         public Position from;
         public Position to;
@@ -33,16 +33,30 @@ public class Board {
         }
     }
 
+    /**
+     * Inner class representing a square on the chess board.
+     * Each square has a position, piece, and string representing the color of square when blank.
+     * @author Kevin
+     */
     public class Square {
         public Position position;
         public Piece piece;
         public String blank;
 
+        /**
+         * Square constructor.
+         * @param p Position of square
+         * @param piece Piece on square.
+         */
         private Square(Position p, Piece piece) {
             this.position = p;
             this.piece = piece;
         }
 
+        /**
+         * Standard toString. Prints blank if piece is null.
+         * @return String
+         */
         @Override
         public String toString() {
             String str;
@@ -54,6 +68,9 @@ public class Board {
         }
     }
 
+    /**
+     * Builds the board and initializes all squares.
+     */
     public Board() {
         board = new ArrayList<>();
         validInCheckMoves = new ArrayList<>();
@@ -145,6 +162,12 @@ public class Board {
         turn = "white";
     }
 
+    /**
+     * Move piece at p1 to p2.
+     * @param p1 from
+     * @param p2 to
+     * @return true if valid, false if invalid, check, checkmate
+     */
     public boolean move(Position p1, Position p2) {
         King king = null;
         // Find p1 and p2 squares
@@ -207,6 +230,11 @@ public class Board {
         return true;
     }
 
+    /**
+     * Used with checkmate function to test situation if piece was at p.
+     * @param p Position to place piece
+     * @param piece Piece to place
+     */
     public void testMove(Position p, Piece piece) {
         // Find square of p
         Square square = null;
@@ -219,6 +247,10 @@ public class Board {
         //square.piece.tempCurrent(p);
     }
 
+    /**
+     * Un-do what testMove did.
+     * @param p where to undo.
+     */
     public void revert(Position p) {
         // Find square of p
         Square square = null;
@@ -230,6 +262,10 @@ public class Board {
         savedPiece = null;
     }
 
+    /**
+     * Prints the board in current state.
+     * @return String representing board.
+     */
     @Override
     public String toString() {
         String str = "\n";

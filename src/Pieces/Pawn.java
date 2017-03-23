@@ -6,15 +6,28 @@ import chess.Position;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Pawn piece.
+ * @author Kevin
+ */
 public class Pawn extends Piece {
 
     private boolean firstMove;
 
+    /**
+     * set up pawn.
+     * @param p Where on board
+     * @param t team
+     */
 	public Pawn(Position p, String t) {
 		super(p, t);
 		firstMove = true;
 	}
 
+    /**
+     * Populate moves of pawn in validMoves list.
+     * @param board board to use.
+     */
 	@Override
 	public void popMoves(List<Board.Square> board) {
 	    // TODO handle En passant move
@@ -68,12 +81,21 @@ public class Pawn extends Piece {
         }
     }
 
+    /**
+     * Set new position and sets firstMove to false.
+     * @param p Where to move.
+     */
 	@Override
 	public void setCurrent(Position p) {
 	    firstMove = false;
 	    current = p;
 	}
 
+    /**
+     * Determine if this piece is attacking the passed position.
+     * @param p Position to check
+     * @return true if attacking
+     */
 	@Override
 	public boolean isAttacking(Position p) {
 	    if (p == null) return false;
@@ -91,6 +113,10 @@ public class Pawn extends Piece {
         return false;
     }
 
+    /**
+     * Create string rep of piece.
+     * @return String
+     */
 	public String toString() {
 		String str = null;
 		if (team.equalsIgnoreCase("white")) str = "wp";
