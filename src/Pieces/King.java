@@ -165,8 +165,8 @@ public class King extends Piece{
 
     /**
      * Set current with board
-     * @param p
-     * @param board
+     * @param p sfda
+     * @param board sti
      */
 	public void setCurrent(Position p, List<Board.Square> board) {
 	    if (this.team.equals("white") && firstMove) {
